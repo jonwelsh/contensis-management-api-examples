@@ -3,28 +3,139 @@ var router = express.Router();
 var Client = require('contensis-management-api').Client;
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
 
   var client = Client.create({
-    clientId: '6f8ce6e7-b2ee-45ad-9b94-2dbb05871903',
-    clientSecret: '6d80c9a623ce4318bd71d52c0735d67a-4a837b1336344f63b1b24ce2dfa73945-ef09daa8d0f74b1e8e223779c392a67b',
+    clientId: '6f8cf1e8-b2ee-49ad-9b94-2dbb05871903',
+    clientSecret: '6d80c9a356ce4317bd71d92c0735d67a-4a837b1336344f63b1b24ce2dfa73945-ef09daa8d0f74b1e8e223779c392a67b',
     projectId: 'website',
-    rootUrl: 'https://cms-example.cloud.contensis.com'
+    rootUrl: 'https://localhost:44314'
   });
 
-  client.nodes.getRoot()
+  client.contentTypes.list({
+    dataFormat: 'entry',
+    versionStatus: 'latest'
+  })
     .then(result => {
       if (result) {
         console.log('result: ', result);
+        res.render('index', { title: 'Success' });
       }
-      res.render('index', { title: 'Express' });
     })
+    .catch(err => {
+      console.log('fetch error: ', err);
+      res.render('index', { title: 'Error' });
+    });
 
+  // client.projects.get()
 
+  // client.projects.get('test')
+
+  // client.projects.get('test')
+  // .then(result => {
+  //   if (result) {
+  //     console.log('result: ', result);
+  //     result.id = 'test1';
+  //     result.name = 'Test 1';
+  //     client.projects.create(result).then(ft => {
+  //       console.log('ft: ', ft);
+  //       res.render('index', { title: 'Success' });
+  //     });
+  //   }   
+  // })
+
+  // client.projects.get('test1')
+  //   .then(result => {
+  //     if (result) {
+  //       console.log('result: ', result);
+  //       client.projects.delete(result.id).then(ft => {
+  //         console.log('ft: ', ft);
+  //         res.render('index', { title: 'Success' });
+  //       });
+  //     }     
+  //   })
+
+  // client.projects.get('test1')
+  //   .then(result => {
+  //     if (result) {
+  //       console.log('result: ', result);
+  //       result.name = 'Test 1 v1';
+  //       client.projects.update(result).then(ft => {
+  //         console.log('ft: ', ft);
+  //         res.render('index', { title: 'Success' });
+  //       });
+  //     }     
+  //   })
+
+  // client.projects.list()
+
+  // client.contentTypes.list({
+  //   dataFormat: 'entry',
+  //   versionStatus: 'latest'
+  // })
 
   // client.contentTypes.get('movie')
 
   // client.contentTypes.list()
+
+  // client.contentTypes.get('simple')
+  // .then(result => {
+  //   if (result) {
+  //     console.log('result: ', result);
+  //     let newContentType = result;
+  //     newContentType.id = "simple1";
+  //     newContentType.name['en-GB'] = "Simple 1";
+  //     delete newContentType.version;
+  //     client.contentTypes.create(newContentType).then( createResult => {
+  //       console.log('createResult: ', createResult);
+  //       res.render('index', { title: 'Success' });
+  //     })
+  //   }
+  // })
+
+  // client.contentTypes.get('simple')
+  // .then(result => {
+  //   if (result) {
+  //     console.log('result: ', result);
+  //     let newContentType = result;
+  //     newContentType.name['en-GB'] = "Simple v1";
+  //     client.contentTypes.update(newContentType).then( updateResult => {
+  //       console.log('updateResult: ', updateResult);
+  //       res.render('index', { title: 'Success' });
+  //     })
+  //   } 
+  // })
+
+  // client.contentTypes.get({
+  //   id: "simple",
+  //   version: '2.2',
+  //   versionStatus: 'published'
+  // })
+
+  // client.contentTypes.get('simple1')
+  // .then(result => {
+  //   if (result) {
+  //     console.log('result: ', result);
+
+  //     client.contentTypes.delete(result.id).then( updateResult => {
+  //       console.log('deleteResult: ', updateResult);
+  //       res.render('index', { title: 'Success' });
+  //     })
+  //   } 
+  // })
+
+  // client.contentTypes.get('simple')
+  //   .then(result => {
+  //     if (result) {
+  //       console.log('result: ', result);
+
+  //       client.contentTypes.invokeWorkflow(result, 'publish').then(updateResult => {
+  //         console.log('publishResult: ', updateResult);
+  //         res.render('index', { title: 'Success' });
+  //       });
+  //     }
+  //   })
+
 
   // client.entries.get('4b776c7b-415c-482a-be2f-9ec968745868')
 
@@ -47,6 +158,11 @@ router.get('/', function (req, res, next) {
   //     pageSize: 50
   //   }
   // })
+
+  //client.entries.createAsset({ "title": "Batman Begins" }, 'C:/Temp/test1.jpg', '/contensis-management-api/assets')
+
+  // client.entries.get('5bca5bec-a401-4c80-a02a-c3ed2cf8f150').then(asset => {
+  //   client.entries.updateAsset(asset, 'C:/Temp/test2.jpg')
 
   // client.nodes.getRoot()
 
