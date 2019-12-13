@@ -69,14 +69,23 @@ router.get('/', async function (req, res, next) {
 
   // client.projects.list()
 
+  // client.components.list('published')
+
+  // client.components.get('searchable')
+
+  // client.components.get('searchable')
+
+  // client.components.get('searchable')
+  //   .then(result => {
+  //     if (result) {
+  //       result.id = 'searchable1';
+  //       result.name['en-GB'] = 'searchable 1';
+  //       client.components.create(result)
+
   // client.contentTypes.list({
   //   dataFormat: 'entry',
   //   versionStatus: 'latest'
   // })
-
-  // client.contentTypes.get('movie')
-
-  // client.contentTypes.list()
 
   // client.contentTypes.get('simple')
   // .then(result => {
@@ -92,6 +101,16 @@ router.get('/', async function (req, res, next) {
   //     })
   //   }
   // })
+
+  // client.components.get('searchable1')
+  // .then(result => {
+  //   if (result) {      
+  //     client.components.delete(result.id)
+
+  // client.components.get('searchable')
+  //   .then(result => {
+  //     if (result) {          
+  //       client.components.invokeWorkflow(result, 'publish')
 
   // client.contentTypes.get('simple')
   // .then(result => {
@@ -116,7 +135,6 @@ router.get('/', async function (req, res, next) {
   // .then(result => {
   //   if (result) {
   //     console.log('result: ', result);
-
   //     client.contentTypes.delete(result.id).then( updateResult => {
   //       console.log('deleteResult: ', updateResult);
   //       res.render('index', { title: 'Success' });
@@ -128,7 +146,6 @@ router.get('/', async function (req, res, next) {
   //   .then(result => {
   //     if (result) {
   //       console.log('result: ', result);
-
   //       client.contentTypes.invokeWorkflow(result, 'publish').then(updateResult => {
   //         console.log('publishResult: ', updateResult);
   //         res.render('index', { title: 'Success' });
@@ -213,6 +230,56 @@ router.get('/', async function (req, res, next) {
 
   // client.nodes.delete('c5049244-0c7a-4a70-b473-db1a8f0c908b')
 
+  // client.nodes.setChildrenOrder(
+  //   '09795671-12d5-486e-8a9d-1c4b8048fbe3',
+  //   ['167ac193-c6ea-4aae-b7ce-68b26152eca5', '936b6e09-05cf-4652-8872-45c9fc99fc2c', '45bfd6a1-e8fb-44e0-a457-bf64cea5ea25'])
+
+  // client.nodes.deleteChildrenOrder(
+  //   '09795671-12d5-486e-8a9d-1c4b8048fbe3')
+
+  // client.roles.list({ pageIndex: 1, pageSize: 2 })
+
+  // client.roles.get('da1c235d-af39-497e-8d0d-b5a5e4f36ca1')
+
+  // client.roles.get('da1c235d-af39-497e-8d0d-b5a5e4f36ca1')
+  // .then(result => {
+  //   if (result) {
+  //     delete result.id;
+  //     result.name['en-GB'] = result.name['en-GB'] + ' Copy';
+  //     client.roles.create(result)
+
+  
+  // client.roles.get('8c5d47b0-0700-40a4-9dbd-a3d21b45bf14')
+  //   .then(result => {
+  //     if (result) {        
+  //       result.name['en-GB'] = result.name['en-GB'] + ' v1';
+  //       client.roles.update(result)
+
+  // client.permissions.getPermissions({
+  //   resourceType: 'entries',
+  //   resourceId: '/b84c7a20-8819-4f90-9e73-c8e3cd5995e7',
+  //   userId: -1
+  // })
+
+  // client.permissions.getPermissions({
+  //   resourceType: 'assets',
+  //   resourceId: '0eea2b38-e153-42c9-94de-49001becae99',
+  //   userId: 36
+  // })
+
+  // client.permissions.getAuthorizationForAction({
+  //   resourceType: 'entries',
+  //   resourceId: 'b84c7a20-8819-4f90-9e73-c8e3cd5995e7',
+  //   actionName: 'sysCreate',
+  //   userId: 36
+  // })
+
+  // client.permissions.getAuthorizationForAction({
+  //   resourceType: 'assets',
+  //   resourceId: '0eea2b38-e153-42c9-94de-49001becae99',
+  //   actionName: 'sysCreate',
+  //   userId: 36
+  // })
 });
 
 module.exports = router;
