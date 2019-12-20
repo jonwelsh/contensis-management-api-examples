@@ -19,7 +19,15 @@ router.get('/', async function (req, res, next) {
     .then(result => {
       if (result) {
         console.log('result: ', result);
+        client.entries.invokeWorkflow(result, 'draft.publish')
+          .then(updateResult => {
+            console.log('updateResult: ', result);
         res.render('index', { title: 'Success' });
+          })
+          .catch(err => {
+            console.log('fetch error: ', err);
+            res.render('index', { title: 'Error' });
+          });
       }
     })
     .catch(err => {
@@ -175,6 +183,13 @@ router.get('/', async function (req, res, next) {
   //     pageSize: 50
   //   }
   // })
+
+  // client.entries.delete('fa9bf8d8-c7f2-4fed-ae38-e7b1b2935d1c', ['fr', 'fr-FR'])
+
+  //  client.entries.invokeWorkflowByTrigger(result, {
+  //   event: 'sysUnpublish',
+  //   language: 'en-GB'
+  // }).then(updateResult => {
 
   //client.entries.createAsset({ "title": "Batman Begins" }, 'C:/Temp/test1.jpg', '/contensis-management-api/assets')
 
