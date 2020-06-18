@@ -143,9 +143,9 @@ exports.users_isInGroups = function users_isInGroups(client, res) {
         });
 }
 
-exports.users_getGroups = function users_getGroups(client, res) {
+exports.users_getUserGroups = (client, res) => {
     const userId = "0E2879B8-FA05-4291-BC99-035259B1CE61";
-    client.users.getGroups(userId)
+    client.users.getUserGroups(userId)
         .then(result => {
             console.log('API call result: ', result);
             res.render('index', { title: 'Success' });
@@ -154,11 +154,11 @@ exports.users_getGroups = function users_getGroups(client, res) {
             console.log('API call fetch error: ', error);
             res.render('index', { title: 'Error' });
         });
-}
+};
 
-exports.users_getGroupsIncludeInherited = function users_getGroupsIncludeInherited(client, res) {
+exports.users_getUserGroupsIncludeInherited = (client, res) => {
     const userId = "0E2879B8-FA05-4291-BC99-035259B1CE61";
-    client.users.getGroups({ userId, includeInherited: true })
+    client.users.getUserGroups({ userId, includeInherited: true })
         .then(result => {
             console.log('API call result: ', result);
             res.render('index', { title: 'Success' });
@@ -167,4 +167,4 @@ exports.users_getGroupsIncludeInherited = function users_getGroupsIncludeInherit
             console.log('API call fetch error: ', error);
             res.render('index', { title: 'Error' });
         });
-}
+};
