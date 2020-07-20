@@ -108,7 +108,7 @@ async function createContensisManagementApiClient(username, password) {
   managementApiClient.bearerTokenExpiryDate = transientClient.bearerTokenExpiryDate;
   managementApiClient.refreshToken = transientClient.refreshToken;
   managementApiClient.refreshTokenExpiryDate = transientClient.refreshTokenExpiryDate;
-
+  managementApiClient.contensisClassicToken = transientClient.contensisClassicToken;
   cookies.set(
     ContensisRefreshTokenCookieName,
     managementApiClient.refreshToken,
