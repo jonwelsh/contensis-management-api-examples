@@ -11,6 +11,7 @@ import './App.css';
 
 import { Cookies } from 'react-cookie';
 import { Client } from 'contensis-management-api';
+import { ContensisApplicationError, ContensisAuthenticationError } from 'contensis-core-api';
 
 // ideally the names of any access related cookies should be obfuscated to make their intention less visible
 const ContensisRefreshTokenCookieName = 'ContensisRefreshToken';
@@ -92,7 +93,17 @@ async function createContensisManagementApiClient(username, password) {
   console.log('created client from user name and password');
 
   // any error at this point should be treated like a login error
-  await transientClient.ensureBearerToken();
+  await transientClient.ensureBearerToken().catch(error => {
+    if (error instanceof ContensisApplicationError) {
+      console.log('The error is ContensisApplicationError:', error);
+    }
+
+    if (error instanceof ContensisAuthenticationError) {
+      console.log('The error is ContensisAuthenticationError:', error);
+    }
+
+    throw error;
+  });
 
   // we can now store a client based on a refresh token
   let managementApiClient = Client.create({
