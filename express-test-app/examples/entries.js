@@ -1,13 +1,22 @@
-exports.entries_search = function entries_search(client, res) {
-    var query = new Query(Op.contains('text', 'Test12345'));
-    client.entries.search(query)
+const Query = require('contensis-management-api').Query;
+const Op = require('contensis-management-api').Op;
+
+exports.entries_search = function entries_search(client) {
+    var query = new Query(Op.or(
+        Op.freeText('entryTitle', 'Testing'),
+        Op.freeText('entryDescription', 'Testing')
+    ));
+
+    // var query = new Query(
+    //     Op.freeText('entryTitle', 'Testing'));
+    return client.entries.search(query)
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            return result;
         })
         .catch(error => {
             console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            throw error;
         });
 }
 
