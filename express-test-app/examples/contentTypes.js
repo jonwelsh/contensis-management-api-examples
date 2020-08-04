@@ -8,7 +8,7 @@ exports.contentTypes_list = (client) => {
       return result;
     })
     .catch(error => {
-      console.log('API call fetch error: ', error);
+      console.log('API call error: ', error);
       throw error;
     });
 };

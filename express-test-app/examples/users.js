@@ -1,5 +1,5 @@
 exports.users_getCurrent = (client, res) => {
-    return client.users.getCurrent()
+    return client.security.users.getCurrent()
         .then(result => {
             console.log('API call result: ', result);
             if (res) {
@@ -8,7 +8,7 @@ exports.users_getCurrent = (client, res) => {
             return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
+            console.log('API call error: ', error);
             if (res) {
                 res.render('index', { title: 'Error' });
             }
@@ -16,54 +16,74 @@ exports.users_getCurrent = (client, res) => {
 };
 
 exports.users_getById = (client, res) => {
-    return client.users.getById('{24312B9F-0B66-4E6D-AEC0-6348C5B8D867}')
+    return client.security.users.getById('{24312B9F-0B66-4E6D-AEC0-6348C5B8D867}')
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 };
 
 exports.users_getByUsername = (client, res) => {
-    return client.users.getByUsername('zengenti')
+    return client.security.users.getByUsername('zengenti')
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 };
 
 exports.users_getByEmail = (client, res) => {
-    return client.users.getByEmail('test@zengenti.com')
+    return client.security.users.getByEmail('test@zengenti.com')
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 };
 
 exports.users_list = (client, res) => {
-    return client.users.list({
+    return client.security.users.list({
         q: 'zengenti',
         pageOptions: { pageIndex: 1, pageSize: 5 },
-        order: ['username']
+        order: ['userName']
     })
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 };
 
@@ -82,14 +102,19 @@ exports.users_create = (client, res) => {
         }
     };
 
-    return client.users.create(user)
+    return client.security.users.create(user)
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 };
 
@@ -107,7 +132,7 @@ exports.users_update = (client, res, user) => {
         };
     }
 
-    return client.users.update(user)
+    return client.security.users.update(user)
         .then(result => {
             console.log('API call result: ', result);
             if (!!res) {
@@ -117,7 +142,7 @@ exports.users_update = (client, res, user) => {
             return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', JSON.stringify(error));
+            console.log('API call error: ', JSON.stringify(error));
             if (!!res) {
                 res.render('index', { title: 'Error' });
             }
@@ -129,67 +154,97 @@ exports.users_delete = (client, res) => {
         "id": "00000000-0000-0000-0000-000000000002"
     };
 
-    client.users.delete(user.id)
+    client.security.users.delete(user.id)
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 };
 
-exports.users_isInGroup = (client, res) => {
+exports.users_users_userIsMemberOfGroup = (client, res) => {
     const userId = "0E2879B8-FA05-4291-BC99-035259B1CE61";
     const groupId = "89CEE207-6F12-4D27-8693-B7693766A82D";
-    return client.users.isInGroup(userId, groupId)
+    return client.security.users.userIsMemberOf(userId, groupId)
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 };
 
-exports.users_isInGroups = function users_isInGroups(client, res) {
+exports.users_userIsMemberOfGroups = (client, res) => {
     const userId = "0E2879B8-FA05-4291-BC99-035259B1CE61";
     const groupIds = ["89CEE207-6F12-4D27-8693-B7693766A82D", "2E86F729-9632-4D87-B38F-DF017F90B5CC"];
-    client.users.isInGroups(userId, groupIds)
+    return client.security.users.userIsMemberOf(userId, groupIds)
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 }
 
 exports.users_getUserGroups = (client, res) => {
     const userId = "0E2879B8-FA05-4291-BC99-035259B1CE61";
-    client.users.getUserGroups(userId)
+    client.security.users.getUserGroups(userId)
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 };
 
 exports.users_getUserGroupsIncludeInherited = (client, res) => {
     const userId = "0E2879B8-FA05-4291-BC99-035259B1CE61";
-    client.users.getUserGroups({ userId, includeInherited: true })
+    client.security.users.getUserGroups({ userId, includeInherited: true })
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+
+            return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
-            res.render('index', { title: 'Error' });
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
 };

@@ -7,7 +7,7 @@
     "debug": "nodemon --inspect ./bin/www"
   },
   "dependencies": {
-    "contensis-management-api": "file:../../contensis-management-api",
+    "contensis-management-api": "^1.0.0-rc.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",

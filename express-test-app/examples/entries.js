@@ -15,7 +15,7 @@ exports.entries_search = function entries_search(client) {
             return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
+            console.log('API call error: ', error);
             throw error;
         });
 }
@@ -27,7 +27,7 @@ exports.entries_list = (client, contentTypeId) => {
             return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
+            console.log('API call error: ', error);
             throw error;
         });
 };
@@ -49,7 +49,7 @@ exports.create_asset = (client) => {
             return result;
         })
         .catch(error => {
-            console.log('API call fetch error: ', error);
+            console.log('API call error: ', error);
             throw error;
         });
 };
@@ -58,7 +58,7 @@ exports.update_asset = (client, entryId) => {
     return client.entries.get(entryId).then(asset => {
         return client.entries.updateAsset(asset, 'C:/Temp/test_1.jpg')
             .catch(error => {
-                console.log('API call fetch error: ', error);
+                console.log('API call error: ', error);
                 throw error;
             });
     });

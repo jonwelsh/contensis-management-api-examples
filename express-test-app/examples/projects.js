@@ -6,7 +6,7 @@ exports.projects_get = (client, res) => {
       res.render('index', { title: 'Success' });
     })
     .catch(error => {
-      console.log('API call fetch error: ', error);
+      console.log('API call error: ', error);
       res.render('index', { title: 'Error' });
     });
 };
@@ -57,7 +57,7 @@ exports.projects_list = (client) => {
       return result;
     })
     .catch(error => {
-      console.log('API call fetch error: ', error);
+      console.log('API call error: ', error);
       throw error;
     });
 };
