@@ -163,19 +163,25 @@ exports.groups_removeUser = function groups_removeUser(client, res) {
         });
 }
 
-exports.groups_addChildGroup = function groups_addChildGroup(client, res) {
+exports.groups_addGroup = (client, res) => {
     const groupId = "89CEE207-6F12-4D27-8693-B7693766A82D";
     const childGroupId = "2E86F729-9632-4D87-B38F-DF017F90B5CC";
     client.security.groups.addChildGroup(groupId, childGroupId)
         .then(result => {
             console.log('API call result: ', result);
-            res.render('index', { title: 'Success' });
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+
+            return result;
         })
         .catch(error => {
             console.log('API call error: ', error);
-            res.render('index', { title: 'Error' });
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
         });
-}
+};
 
 exports.groups_removeChildGroup = function groups_removeChildGroup(client, res) {
     const groupId = "89CEE207-6F12-4D27-8693-B7693766A82D";

@@ -167,7 +167,7 @@ class App extends Component {
             projects: []
           });
         } else {
-          client.users.getCurrent()
+          client.security.users.getCurrent()
             .then(currentUser => this.setState({ currentUser }));
           client.projects.list()
             .then(projects => this.setState({ projects }));

@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const Client = require('contensis-management-api').Client;
+const Client = require('contensis-management-api/lib/client').UniversalClient;
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
