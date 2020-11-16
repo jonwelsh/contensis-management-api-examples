@@ -248,3 +248,70 @@ exports.users_getUserGroupsIncludeInherited = (client, res) => {
             }
         });
 };
+
+exports.users_suspendUser = (client, res) => {
+    let user = {
+        "id": "D2F75C4F-946C-48DD-8A38-9C72EA3BD4D7"
+    };
+
+    return client.security.users.suspendUser(user.id)
+        .then(result => {
+            console.log('API call result: ', result);
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+
+            return result;
+        })
+        .catch(error => {
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
+        });
+};
+
+exports.users_unsuspendUser = (client, res) => {
+    let user = {
+        "id": "D2F75C4F-946C-48DD-8A38-9C72EA3BD4D7"
+    };
+
+    return client.security.users.unsuspendUser(user.id)
+        .then(result => {
+            console.log('API call result: ', result);
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+
+            return result;
+        })
+        .catch(error => {
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
+        });
+};
+
+exports.users_unlockUser = (client, res) => {
+    let user = {
+        "id": "D2F75C4F-946C-48DD-8A38-9C72EA3BD4D7"
+    };
+
+    return client.security.users.unlockUser(user.id)
+        .then(result => {
+            console.log('API call result: ', result);
+            if (res) {
+                res.render('index', { title: 'Success' });
+            }
+
+            return result;
+        })
+        .catch(error => {
+            console.log('API call error: ', error);
+            if (res) {
+                res.render('index', { title: 'Error' });
+            }
+        });
+};
+
