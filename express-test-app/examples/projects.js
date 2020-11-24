@@ -1,13 +1,33 @@
 
-exports.projects_get = (client, res) => {
-  client.projects.get()
+exports.projects_create = (client) => {
+  let project = {
+    id: 'project2',
+    name: 'Project 2',
+    description: 'Project 2 description',
+    primaryLanguage: 'en-GB',
+    supportedLanguages: ['fr-FR', 'de-DE']
+  };
+
+  return client.projects.create(project)
     .then(result => {
       console.log('API call result: ', result);
-      res.render('index', { title: 'Success' });
+      return result;
     })
     .catch(error => {
       console.log('API call error: ', error);
-      res.render('index', { title: 'Error' });
+      throw error;
+    });
+};
+
+exports.projects_get = (client) => {
+  client.projects.get()
+    .then(result => {
+      console.log('API call result: ', result);
+      return result;
+    })
+    .catch(error => {
+      console.log('API call error: ', error);
+      throw error;
     });
 };
 
