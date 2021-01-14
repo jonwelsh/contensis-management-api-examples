@@ -1,5 +1,62 @@
+const uuidv4 = require('uuid/v4');
+
 const Query = require('contensis-management-api').Query;
 const Op = require('contensis-management-api').Op;
+
+exports.entries_create = (client) => {
+    const entryId = uuidv4();
+    let newEntry = {
+        "title": "Entry 1",
+        "sys": {
+            "id": entryId,
+            "contentTypeId": "simple",
+            "projectId": "website",
+            "language": "en-GB",
+            "dataFormat": "entry",
+        }
+    };
+
+    return client.entries.create(newEntry)
+        .then(result => {
+            console.log('API call result: ', result);
+            return result;
+        })
+        .catch(error => {
+            console.log('API call error: ', error);
+            throw error;
+        });
+};
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+exports.entries_create_with_id = async (client, entryId, wait = false) => {
+    let newEntry = {
+        "title": "Entry 1",
+        "sys": {
+            "id": entryId,
+            "contentTypeId": "simple",
+            "projectId": "website",
+            "language": "en-GB",
+            "dataFormat": "entry",
+        }
+    };
+
+    if (wait) {
+        await sleep(1000);
+    }
+
+    return client.entries.create(newEntry)
+        .then(result => {
+            console.log('API call result: ', result);
+            return result;
+        })
+        .catch(error => {
+            console.log('API call error: ', error);
+            throw error;
+        });
+};
 
 exports.entries_search = function entries_search(client) {
     var query = new Query(Op.or(
@@ -64,20 +121,31 @@ exports.update_asset = (client, entryId) => {
     });
 };
 
-//   const entryId = uuidv4();
-  //   let newEntry = {
-  //     "title": "Entry 4",
-  //     "data": "Data 4",    
-  //     "sys": {
-  //       "id": entryId,
-  //         "contentTypeId": "simpleContent",
-  //         "projectId": "website",
-  //         "language": "en-GB",
-  //         "dataFormat": "entry",
-  //     }
-  // };
-
-  // client.entries.create(newEntry)
+exports.invoke_workflow_by_trigger = (client) => {
+    return client.entries.get('63070a56-3841-48fc-ae22-eb6e81af3622')
+        .then(entry => {
+            client.entries.invokeWorkflowByTrigger(entry, {
+                event: 'awaitingSync.fail', //'syncFailed.submit',
+                language: 'en-GB',
+                version: '0.1',
+                data: {
+                    message: 'API manual fail'
+                }
+            })
+                .then(result => {
+                    console.log('API call result: ', result);
+                    return result;
+                })
+                .catch(error => {
+                    console.log('API invokeWorkflowByTrigger call error: ', error);
+                    throw error;
+                });
+        })
+        .catch(error => {
+            console.log('API get entry call error: ', error);
+            throw error;
+        });
+};
 
   // client.entries.get('5bca5bec-a401-4c80-a02a-c3ed2cf8f150').then(asset => {
   //   client.entries.updateAsset(asset, 'C:/Temp/test2.jpg')
@@ -103,8 +171,3 @@ exports.update_asset = (client, entryId) => {
   // })
 
   // client.entries.delete('fa9bf8d8-c7f2-4fed-ae38-e7b1b2935d1c', ['fr', 'fr-FR'])
-
-  //  client.entries.invokeWorkflowByTrigger(result, {
-  //   event: 'sysUnpublish',
-  //   language: 'en-GB'
-  // }).then(updateResult => {

@@ -23,4 +23,12 @@ router.get('/', async function (req, res, next) {
 
 });
 
+async function process(arrayOfPromises) {
+  let responses = await Promise.all(arrayOfPromises);
+  for (let r of responses) {
+    console.log('response :', response);
+  }
+  return;
+}
+
 module.exports = router;
